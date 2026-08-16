@@ -1,0 +1,19 @@
+services:
+  postgres:
+    image: postgres:17
+    container_name: financetracker-postgres
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: financetracker
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - financetracker-postgres-data:/var/lib/postgresql/data
+
+volumes:
+  financetracker-postgres-data:
