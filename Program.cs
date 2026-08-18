@@ -2,6 +2,10 @@ using FinanceTracker.Configuration;
 using FinanceTracker.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
+using FinanceTracker.Repository.Interface;
+using FinanceTracker.Repository;
+using FinanceTracker.Service.Interface;
+using FinanceTracker.Service;
 var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
@@ -14,6 +18,9 @@ builder.Services.AddDbContext<FinanceDbContext>(
     (
     builder.Configuration.GetConnectionString("DefaultConnection")
     ));
+
+builder.Services.AddScoped<IAccountRepository, AccountRepository>();
+builder.Services.AddScoped<IAccountService, AccountService>();
 
 var app = builder.Build();
 
